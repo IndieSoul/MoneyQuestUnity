@@ -22,10 +22,23 @@ public class L1BuyShop : MonoBehaviour
         if (other.gameObject.tag == "Player") canBuy = false;
     }
     
+    private void Update() {
+        if (canBuy && Input.GetKeyDown(KeyCode.Space)) 
+        {
+            if (canBuy == false) return;
+
+            levelManager.GetScore();
+            levelManager.buyGroceries = true;
+            messageObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
+    }
+
     void OnMouseDown()
     {
         if (canBuy == false) return;
 
+        levelManager.GetScore();
         levelManager.buyGroceries = true;
         messageObject.SetActive(false);
         this.gameObject.SetActive(false);

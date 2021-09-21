@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+using Cinemachine;
 
 public class Level1Manager : MonoBehaviour
 {
@@ -38,15 +40,37 @@ public class Level1Manager : MonoBehaviour
     public Color32 colorIncomplete;
     public Color32 colorComplete;
 
+    [Header("Text")]
+    public TextMeshProUGUI textScore;
+
+    [Header("Players")]
+
+    public GameObject girl;
+    public GameObject boy;
+    public CinemachineVirtualCamera virtualCamera;
+
     public float timerStart = 120;
     private float timer = 120;
     public bool timerRunning = false;
 
+    private GameManager gameManager;
+
     private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         timer = timerStart;
         timerRunning = true;
-    }
 
+        // If girl selected
+        if (gameManager.playerSelect == 0) {
+            girl.SetActive(true);
+            boy.SetActive(false);
+            virtualCamera.Follow = girl.transform;
+        } else {
+            girl.SetActive(false);
+            boy.SetActive(true);
+            virtualCamera.Follow = boy.transform;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -106,6 +130,13 @@ public class Level1Manager : MonoBehaviour
         }
     }
 
+    public void GetScore() {
+        gameManager.score += Random.Range(0, 6);
+        if (Random.Range(0, 11) == 7) {
+            gameManager.score += 5;
+        }
+        textScore.text = "Score: " + gameManager.score.ToString();
+    }
     public void ShowHomeworksList() 
     {
         homeworksList.SetActive(!homeworksList.activeSelf);

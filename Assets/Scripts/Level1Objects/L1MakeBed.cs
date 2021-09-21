@@ -22,11 +22,25 @@ public class L1MakeBed : MonoBehaviour
     {
         if (other.gameObject.tag == "Player") canClean = false;
     }
+
+    private void Update() {
+        if (canClean && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (canClean == false) return;
+
+            levelManager.GetScore();
+            cleanBed.SetActive(true);
+            levelManager.makeBed = true;
+            messageObject.SetActive(false);
+            this.gameObject.SetActive(false);   
+        }
+    }
     
     void OnMouseDown()
     {
         if (canClean == false) return;
 
+        levelManager.GetScore();
         cleanBed.SetActive(true);
         levelManager.makeBed = true;
         messageObject.SetActive(false);

@@ -15,6 +15,34 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject stage2Inst1Panel;
     [SerializeField] private GameObject pathwayPanel;
 
+    [SerializeField] private GameObject circleGirl;
+    [SerializeField] private GameObject circleBoy;
+
+    GameManager gameManager;
+
+    private void Start() {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
+    private void Update() {
+        if (gameManager.playerSelect == 0) {
+            circleGirl.SetActive(true);
+            circleBoy.SetActive(false);
+        }
+        if (gameManager.playerSelect == 1) {
+            circleGirl.SetActive(false);
+            circleBoy.SetActive(true);
+        }
+    }
+
+    public void SelectBoy() {
+        gameManager.playerSelect = 1;
+    }
+
+    public void SelectGirl() {
+        gameManager.playerSelect = 0;
+    }
+
     public void StartPanelEnable() 
     {
         startPanel.SetActive(true);

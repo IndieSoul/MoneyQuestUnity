@@ -22,11 +22,25 @@ public class L1WashDishes : MonoBehaviour
     {
         if (other.gameObject.tag == "Player") canDish = false;
     }
+
+    private void Update() {
+        if (canDish && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (canDish == false) return;
+
+            levelManager.GetScore();
+            dishesClean.SetActive(true);
+            levelManager.washDishes = true;
+            messageObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
+    }
     
     void OnMouseDown()
     {
         if (canDish == false) return;
 
+        levelManager.GetScore();
         dishesClean.SetActive(true);
         levelManager.washDishes = true;
         messageObject.SetActive(false);

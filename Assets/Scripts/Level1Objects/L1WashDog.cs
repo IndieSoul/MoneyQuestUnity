@@ -22,11 +22,25 @@ public class L1WashDog : MonoBehaviour
     {
         if (other.gameObject.tag == "Player") canBath = false;
     }
+
+    private void Update() {
+        if (canBath && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (canBath == false) return;
+
+            levelManager.GetScore();
+            dogClean.SetActive(true);
+            levelManager.bathDog = true;
+            messageObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
+    }
     
     void OnMouseDown()
     {
         if (canBath == false) return;
 
+        levelManager.GetScore();
         dogClean.SetActive(true);
         levelManager.bathDog = true;
         messageObject.SetActive(false);

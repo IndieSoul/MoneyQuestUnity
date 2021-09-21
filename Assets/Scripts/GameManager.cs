@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public string playerAge = "";
     public int playerSelect = 0;
 
+    public int score = 0;
+
     private void Awake()
     {
         if (gameManager != null && gameManager != this)
@@ -20,16 +22,4 @@ public class GameManager : MonoBehaviour
              DontDestroyOnLoad(this.gameObject);
          }
     }
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update() 
-    {
-        
-    }
-
-
 }

@@ -37,6 +37,19 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+
+        if (Input.GetKey(KeyCode.RightArrow)) {
+            rb.velocity = Vector2.right * moveSpeed * Time.deltaTime;
+            animatorPlayer.SetBool("isWalking", true);
+            spriteRendererPlayer.flipX = false;
+        }
+        if (Input.GetKey(KeyCode.LeftArrow)) 
+        {
+            rb.velocity = -Vector2.right * moveSpeed * Time.deltaTime;
+            animatorPlayer.SetBool("isWalking", true);
+            spriteRendererPlayer.flipX = true;
+        }
+
         if (direction > 0.2) 
         {
             rb.velocity = Vector2.right * moveSpeed * Time.deltaTime;
@@ -50,7 +63,7 @@ public class PlayerController : MonoBehaviour
             spriteRendererPlayer.flipX = true;
         }
 
-        if (direction < 0.2 && direction > -0.2) 
+        if (direction < 0.2 && direction > -0.2 && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)) 
         {
             rb.velocity = Vector2.zero;
             animatorPlayer.SetBool("isWalking", false);

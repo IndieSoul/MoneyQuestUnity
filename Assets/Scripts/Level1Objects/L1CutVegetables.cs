@@ -22,11 +22,25 @@ public class L1CutVegetables : MonoBehaviour
     {
         if (other.gameObject.tag == "Player") canCut = false;
     }
+
+    private void Update() {
+        if (canCut && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (canCut == false) return;
+
+            levelManager.GetScore();
+            carrotCut.SetActive(true);
+            levelManager.cutVegetable = true;
+            messageObject.SetActive(false);
+            this.gameObject.SetActive(false);
+        }
+    }
     
     void OnMouseDown()
     {
         if (canCut == false) return;
 
+        levelManager.GetScore();
         carrotCut.SetActive(true);
         levelManager.cutVegetable = true;
         messageObject.SetActive(false);
